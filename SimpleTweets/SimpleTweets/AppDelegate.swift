@@ -43,28 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
-        TwitterClient.sharedInstance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential (queryString: url.query), success: { (accessToken: BDBOAuth1Credential!) -> Void in
-            
-            print("Got the access token!")
-            TwitterClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
-            
-            TwitterClient.sharedInstance.GET("1.1/account/verify_credentials.json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                print("user: \(response)")
-                }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                    print("error getting current user")
-                })
-
-        
-            TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                    print("home_timeline: \(response)")
-                }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                    print("error getting current user")
-                })
-        
-        }) { (error: NSError!) -> Void in
-            print("Failed to receive access token")
-        }
-    
+        TwitterClient.sharedInstance.openUrl(url)
         return true
     }
 
