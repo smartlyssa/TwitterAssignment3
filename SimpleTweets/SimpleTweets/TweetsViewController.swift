@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import AFNetworking
 
-class TweetsViewController: UIViewController {
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tweets: [Tweet]?
+    
+    @IBOutlet var tweetsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +21,10 @@ class TweetsViewController: UIViewController {
         // Do any additional setup after loading the view.
         TwitterClient.sharedInstance.homeTimeLineWithParams(nil) { (tweets, error) -> () in
             self.tweets = tweets
-            // reload tableView here
+            // print("TWEET COUNT: \(tweets?.count)")
+            self.tweetsTableView.reloadData()
         }
+        
     }
 
     @IBAction func onLogOut(sender: AnyObject) {
@@ -30,6 +35,22 @@ class TweetsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
+        let currentTweet = tweets![indexPath.row]
+        
+        cell.tweetTextLabel.text = currentTweet.text
+        cell.profilePicImageView.setImageWithURL(NSURL(string: currentTweet.profilePicture!))
+        
+        return cell
+        
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tweets?.count ?? 0
     }
     
 

@@ -29,15 +29,16 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
 
         GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             
-            //                        print("home_timeline: \(response)")
+            print("home_timeline: \(response)")
             var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
 //            for tweet in tweets {
-//                print("text: \(tweet.text), created: \(tweet.createdAt)")
+//                print("text: \(tweet.text), created: \(tweet.createdAt), pic:\(tweet.profilePicture) ")
 //            }
         }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
             print("error getting home timeline")
             completion(tweets: nil, error: error)
+            print(error)
         })
         
     }

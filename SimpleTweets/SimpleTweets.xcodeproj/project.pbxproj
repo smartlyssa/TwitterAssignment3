@@ -17,6 +17,7 @@
 		E06B62641BB34BAA004530CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E06B62631BB34BAA004530CE /* Assets.xcassets */; };
 		E06B62671BB34BAA004530CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E06B62651BB34BAA004530CE /* LaunchScreen.storyboard */; };
 		E09640151BB34D5100EC1BA5 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09640141BB34D5100EC1BA5 /* TwitterClient.swift */; settings = {ASSET_TAGS = (); }; };
+		E0A1AC641BB9B92800947E50 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A1AC631BB9B92800947E50 /* TweetCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		E06B62681BB34BAA004530CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E09640101BB34CDF00EC1BA5 /* SimpleTweets-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleTweets-Bridging-Header.h"; sourceTree = "<group>"; };
 		E09640141BB34D5100EC1BA5 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
+		E0A1AC631BB9B92800947E50 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,16 +98,16 @@
 		E06B625B1BB34BA9004530CE /* SimpleTweets */ = {
 			isa = PBXGroup;
 			children = (
+				E0A1AC601BB9B8DC00947E50 /* Views */,
 				E01214F61BB5B94C0078E26B /* Models */,
 				E09640131BB34D3500EC1BA5 /* API */,
 				E06B625C1BB34BA9004530CE /* AppDelegate.swift */,
-				E06B625E1BB34BA9004530CE /* ViewController.swift */,
 				E06B62601BB34BAA004530CE /* Main.storyboard */,
 				E06B62631BB34BAA004530CE /* Assets.xcassets */,
 				E06B62651BB34BAA004530CE /* LaunchScreen.storyboard */,
 				E06B62681BB34BAA004530CE /* Info.plist */,
 				E09640101BB34CDF00EC1BA5 /* SimpleTweets-Bridging-Header.h */,
-				49DB41DF1BB8F0F6009D8FC5 /* TweetsViewController.swift */,
+				E0A1AC5F1BB9B7CC00947E50 /* View Controllers */,
 			);
 			path = SimpleTweets;
 			sourceTree = "<group>";
@@ -116,6 +118,23 @@
 				E09640141BB34D5100EC1BA5 /* TwitterClient.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		E0A1AC5F1BB9B7CC00947E50 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E06B625E1BB34BA9004530CE /* ViewController.swift */,
+				49DB41DF1BB8F0F6009D8FC5 /* TweetsViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		E0A1AC601BB9B8DC00947E50 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E0A1AC631BB9B92800947E50 /* TweetCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E01214F81BB5C3740078E26B /* User.swift in Sources */,
+				E0A1AC641BB9B92800947E50 /* TweetCell.swift in Sources */,
 				E01214FA1BB5C3880078E26B /* Tweet.swift in Sources */,
 				49DB41E01BB8F0F6009D8FC5 /* TweetsViewController.swift in Sources */,
 				E06B625F1BB34BA9004530CE /* ViewController.swift in Sources */,
