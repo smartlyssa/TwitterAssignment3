@@ -51,8 +51,8 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 
                 //                        print("user: \(response)")
                 var user = User(dictionary: response as! NSDictionary)
-                
-                print("user: \(user.name)")
+                User.currentUser = user
+                // print("user: \(user.name)")
                 self.loginCompletion?(user: user, error: nil)
                 
                 }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
@@ -65,7 +65,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 //                        print("home_timeline: \(response)")
                 var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
                 for tweet in tweets {
-                    print("text: \(tweet.text), created: \(tweet.createdAt)")
+                    // print("text: \(tweet.text), created: \(tweet.createdAt)")
                 }
                 }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                     print("error getting current user")

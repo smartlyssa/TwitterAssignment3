@@ -10,6 +10,9 @@ import UIKit
 
 var _currentUser: User?
 let currentUserKey = "kCurrentUserKey"
+let userDidLoginNotification = "userDidLoginNotification"
+let userDidLogoutNotification = "userDidLogoutNotification"
+
 
 class User: NSObject {
     
@@ -29,16 +32,28 @@ class User: NSObject {
         
     }
     
+    func logout() {
+        User.currentUser = nil
+        TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+    }
+    
     class var currentUser: User? {
         
         get {
         
             if _currentUser == nil {
-                var data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
+                let data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
+                NSUserDefaults.standardUserDefaults().synchronize()
                 if data != nil {
-                    var dictionary = NSJSONSerialization.JSONObjectWithData(data!, options: []) as! NSDictionary
+                    if let dictionary = try! NSJSONSerialization.JSONObjectWithData(data!, options: []) as?NSDictionary {
                     _currentUser = User(dictionary: dictionary)
-        
+                    } else {
+                        print("Error serializing JSON data")
+                    }
+                } else {
+                    print("data is nil")
                 }
             }
         
@@ -50,12 +65,10 @@ class User: NSObject {
             _currentUser = user
             
             if _currentUser != nil {
-                if let data = try! NSJSONSerialization.dataWithJSONObject((user?.dictionary)!, options: []) as?NSDictionary {
+                if let data = try! NSJSONSerialization.dataWithJSONObject((user?.dictionary)!, options: []) as?NSData {
                     
                     NSUserDefaults.standardUserDefaults().setObject(data, forKey: currentUserKey)
-//                    dispatch_async(dispatch_get_main_queue()) {
-//                        // do stuff
-//                    }
+
                 }
                     
             } else {
