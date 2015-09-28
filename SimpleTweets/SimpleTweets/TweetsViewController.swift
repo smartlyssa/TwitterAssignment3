@@ -43,7 +43,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let currentTweet = tweets![indexPath.row]
         
         cell.tweetTextLabel.text = currentTweet.text
-        cell.profilePicImageView.setImageWithURL(NSURL(string: currentTweet.profilePicture!))
+        let url = NSURL(string: currentTweet.user!.profileImageURL!)
+        cell.profilePicImageView.setImageWithURL(url)
+        cell.nameLabel.text = currentTweet.user?.name
+        cell.screenNameLabel.text = "@\(currentTweet.user!.screenName!)"
+        
+        let shortFormatter = NSDateFormatter()
+        shortFormatter.dateFormat = "MM/dd/YYYY HH:mm"
+        let newCreatedAt = shortFormatter.stringFromDate(currentTweet.createdAt!)
+        cell.timeStampLabel.text = newCreatedAt
         
         return cell
         
