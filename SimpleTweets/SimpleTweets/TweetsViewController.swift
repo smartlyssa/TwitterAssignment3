@@ -12,18 +12,27 @@ import AFNetworking
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tweets: [Tweet]?
+    let TWEET_LIMIT = 20
     
     @IBOutlet var tweetsTableView: UITableView!
+    var refreshControl: UIRefreshControl!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tweetsTableView.dataSource = self
+        tweetsTableView.delegate = self
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshTweets", forControlEvents: UIControlEvents.ValueChanged)
+        
+        let dummyTableVC = UITableViewController()
+        dummyTableVC.tableView = tweetsTableView
+        dummyTableVC.refreshControl = refreshControl
+        
         // Do any additional setup after loading the view.
-        TwitterClient.sharedInstance.homeTimeLineWithParams(nil) { (tweets, error) -> () in
-            self.tweets = tweets
-            // print("TWEET COUNT: \(tweets?.count)")
-            self.tweetsTableView.reloadData()
-        }
+        refreshTweets()
         
     }
 
@@ -58,7 +67,29 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tweets?.count ?? 0
+        
+        var tweetCount = tweets?.count ?? 0
+        
+        if tweetCount > TWEET_LIMIT {
+            tweetCount = TWEET_LIMIT
+        }
+        
+        return tweetCount
+    
+    }
+    
+    func refreshTweets() {
+        
+        TwitterClient.sharedInstance.homeTimeLineWithParams(nil) { (tweets, error) -> () in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tweets = tweets
+                // print("TWEET COUNT: \(tweets?.count)")
+                self.tweetsTableView.reloadData()
+                self.refreshControl.endRefreshing()
+                print("timeline refreshed")
+            })
+        }
     }
     
 
