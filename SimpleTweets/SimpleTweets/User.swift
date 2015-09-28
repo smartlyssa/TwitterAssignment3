@@ -9,6 +9,7 @@
 import UIKit
 
 var _currentUser: User?
+let currentUserKey = "kCurrentUserKey"
 
 class User: NSObject {
     
@@ -31,17 +32,38 @@ class User: NSObject {
     class var currentUser: User? {
         
         get {
+        
+            if _currentUser == nil {
+                var data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
+                if data != nil {
+                    var dictionary = NSJSONSerialization.JSONObjectWithData(data!, options: []) as! NSDictionary
+                    _currentUser = User(dictionary: dictionary)
+        
+                }
+            }
+        
             return _currentUser
         }
         
         set(user) {
+            
             _currentUser = user
             
             if _currentUser != nil {
-//                var data = NSJSONSerialization.dataWithJSONObject(obj: user!.dictionary, options: nil)            }
-            
-        }
-        
-    }
+                if let data = try! NSJSONSerialization.dataWithJSONObject((user?.dictionary)!, options: []) as?NSDictionary {
+                    
+                    NSUserDefaults.standardUserDefaults().setObject(data, forKey: currentUserKey)
+//                    dispatch_async(dispatch_get_main_queue()) {
+//                        // do stuff
+//                    }
+                }
+                    
+            } else {
+                NSUserDefaults.standardUserDefaults().setObject(nil, forKey: currentUserKey)
+                
+            }// if
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }  // set
+    } // currentUser
 
 }
