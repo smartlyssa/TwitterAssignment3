@@ -25,6 +25,23 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         return Static.instance
     }
     
+    func homeTimeLineWithParams (params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+
+        GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+            //                        print("home_timeline: \(response)")
+            var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+//            for tweet in tweets {
+//                print("text: \(tweet.text), created: \(tweet.createdAt)")
+//            }
+        }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+            print("error getting home timeline")
+            completion(tweets: nil, error: error)
+        })
+        
+    }
+    
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()) {
         loginCompletion = completion
         
@@ -57,27 +74,13 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 
                 }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                     print("error getting current user")
-            })
-            
-            
-            TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                
-                //                        print("home_timeline: \(response)")
-                var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
-                for tweet in tweets {
-                    // print("text: \(tweet.text), created: \(tweet.createdAt)")
-                }
-                }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                    print("error getting current user")
                     self.loginCompletion?(user: nil, error: error)
             })
             
-            }) { (error: NSError!) -> Void in
-                print("Failed to receive access token")
-                self.loginCompletion?(user: nil, error: error)
+        }) { (error: NSError!) -> Void in
+            print("Failed to receive access token")
+            self.loginCompletion?(user: nil, error: error)
         }
-        
-        
     }
     
 }
