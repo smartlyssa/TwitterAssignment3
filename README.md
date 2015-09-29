@@ -26,4 +26,4 @@ Time spent: ~15 hours but still not enough
 
 ### Walkthrough
 
-![Video Walkthrough](...)
+![Video Walkthrough](SimpleTweets.gif)
