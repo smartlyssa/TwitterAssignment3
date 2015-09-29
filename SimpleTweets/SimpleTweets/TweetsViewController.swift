@@ -52,8 +52,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let currentTweet = tweets![indexPath.row]
         
         cell.tweetTextLabel.text = currentTweet.text
+        
         let url = NSURL(string: currentTweet.user!.profileImageURL!)
         cell.profilePicImageView.setImageWithURL(url)
+    
         cell.nameLabel.text = currentTweet.user?.name
         cell.screenNameLabel.text = "@\(currentTweet.user!.screenName!)"
         
@@ -68,15 +70,16 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-//        var tweetCount = tweets?.count ?? 0
-//        
-//        if tweetCount > TWEET_LIMIT {
-//            tweetCount = TWEET_LIMIT
-//        }
-//        
-//        return tweetCount
-        print(tweets?.count)
-        return tweets?.count ?? 0
+        var tweetCount = tweets?.count ?? 0
+        
+        if tweetCount > TWEET_LIMIT {
+            tweetCount = TWEET_LIMIT
+        }
+          print(tweets?.count)
+        
+        return tweetCount
+
+        // return tweets?.count ?? 0
     }
     
     func refreshTweets() {
@@ -85,7 +88,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tweets = tweets
-                // print("TWEET COUNT: \(tweets?.count)")
+                print("TWEET COUNT: \(tweets?.count)")
                 self.tweetsTableView.reloadData()
                 self.refreshControl.endRefreshing()
                 print("timeline refreshed")

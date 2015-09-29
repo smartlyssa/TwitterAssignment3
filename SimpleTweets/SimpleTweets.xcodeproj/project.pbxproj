@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F709AD7407BF35577295BA3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 682D0A0BF35C82D95D175240 /* libPods.a */; };
+		432BA6E4530DAC4E0DE5A0EC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 533FCCFE27D2944F15369938 /* libPods.a */; };
 		49DB41E01BB8F0F6009D8FC5 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DB41DF1BB8F0F6009D8FC5 /* TweetsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		E01214F81BB5C3740078E26B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01214F71BB5C3740078E26B /* User.swift */; settings = {ASSET_TAGS = (); }; };
 		E01214FA1BB5C3880078E26B /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01214F91BB5C3880078E26B /* Tweet.swift */; settings = {ASSET_TAGS = (); }; };
@@ -22,7 +22,7 @@
 
 /* Begin PBXFileReference section */
 		49DB41DF1BB8F0F6009D8FC5 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
-		682D0A0BF35C82D95D175240 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		533FCCFE27D2944F15369938 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		837803AF586EA2BF99D9AFCE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8A3D042BB75FCA3C8F349E96 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E01214F71BB5C3740078E26B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F709AD7407BF35577295BA3 /* libPods.a in Frameworks */,
+				432BA6E4530DAC4E0DE5A0EC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,7 +54,7 @@
 		813081AAB1BDBBFEEB981B7A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				682D0A0BF35C82D95D175240 /* libPods.a */,
+				533FCCFE27D2944F15369938 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,7 +148,6 @@
 				E06B62551BB34BA9004530CE /* Sources */,
 				E06B62561BB34BA9004530CE /* Frameworks */,
 				E06B62571BB34BA9004530CE /* Resources */,
-				FA5D8C39A8E8DB52B5F9939A /* Embed Pods Frameworks */,
 				B3C1EA7DD2DCE3AEA2956141 /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -221,21 +220,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FA5D8C39A8E8DB52B5F9939A /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FCB8954692E9E9132690274D /* Check Pods Manifest.lock */ = {
@@ -379,10 +363,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SimpleTweets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.thegeekgoddess.SimpleTweets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SimpleTweets/SimpleTweets-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -394,10 +381,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SimpleTweets/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.thegeekgoddess.SimpleTweets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SimpleTweets/SimpleTweets-Bridging-Header.h";
 			};
 			name = Release;
