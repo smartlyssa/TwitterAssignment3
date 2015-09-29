@@ -68,14 +68,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var tweetCount = tweets?.count ?? 0
-        
-        if tweetCount > TWEET_LIMIT {
-            tweetCount = TWEET_LIMIT
-        }
-        
-        return tweetCount
-    
+//        var tweetCount = tweets?.count ?? 0
+//        
+//        if tweetCount > TWEET_LIMIT {
+//            tweetCount = TWEET_LIMIT
+//        }
+//        
+//        return tweetCount
+        print(tweets?.count)
+        return tweets?.count ?? 0
     }
     
     func refreshTweets() {

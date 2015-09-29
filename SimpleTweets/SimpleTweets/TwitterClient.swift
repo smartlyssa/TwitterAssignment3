@@ -32,9 +32,9 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             print("home_timeline: \(response)")
             var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
-//            for tweet in tweets {
-//                print("text: \(tweet.text), created: \(tweet.createdAt), pic:\(tweet.profilePicture) ")
-//            }
+            for tweet in tweets {
+                print("text: \(tweet.text), created: \(tweet.createdAt), pic:\(tweet.profilePicture) ")
+            }
         }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
             print("error getting home timeline")
             completion(tweets: nil, error: error)
